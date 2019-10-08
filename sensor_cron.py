@@ -17,9 +17,7 @@ def read_sensor():
     return temperature_f, humidity
 
 if __name__ == '__main__':
-    db_file = r"/home/zip822/Projects/TemperatureSensor/db/tempSensor.db"
-    
+    db_file = r"/home/pi/Projects/TemperatureSensor/db/tempSensor.db"
     temperature_f, humidity = read_sensor()
-    
-    repo = Repository(db_file)
-    repo.insert_temperature_record(temperature_f, humidity)
+    # repo = Repository(db_file)
+    # repo.insert_temperature_record(temperature_f, humidity)
