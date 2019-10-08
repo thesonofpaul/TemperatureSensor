@@ -32,7 +32,7 @@ class Repository:
             print(e)
 
 if __name__ == '__main__':
-    db_file = r"/home/zip822/Projects/TemperatureSensor/db/tempSensor.db"
+    db_file = r"/home/pi/Projects/TemperatureSensor/db/tempSensor.db"
     try:
         repo = Repository(db_file)
         repo.insert_temperature_record(69.6, 96.9)
