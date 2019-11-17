@@ -1,0 +1,28 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "api to connect with sqlite db",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thesonofpaul/TemperatureSensor.git"
+  },
+  "author": "thesonofpaul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thesonofpaul/TemperatureSensor/issues"
+  },
+  "homepage": "https://github.com/thesonofpaul/TemperatureSensor#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "sqlite3": "^4.1.0",
+    "md5": "^2.2.1"
+  }
+}
