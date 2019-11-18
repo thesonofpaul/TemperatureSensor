@@ -44,11 +44,61 @@ class Repository:
                 c.execute(clear_old_records_sql, params)
         except Error as e:
             print(e)
+    
+    def get_settings(self):
+        """ retrieve min and max temperature settings """
+        get_settings_sql = ''' SELECT * FROM setting '''
+        try:
+            conn = self.create_connection()
+            with conn:
+                c = conn.cursor()
+                c.execute(get_settings_sql)
+                ret_val = c.fetchall()
+                print(ret_val)
+                return ret_val
+        except Error as e:
+            print(e)
+    
+    def get_active_sms(self):
+        """ retrieve sms on sms-enabled accounts """
+        get_active_sms_sql = '''
+            SELECT sms
+            FROM account
+            WHERE enableSms = 1
+            '''
+        try:
+            conn = self.create_connection()
+            with conn:
+                c = conn.cursor()
+                c.execute(get_active_sms_sql)
+                ret_val = c.fetchall()
+                print(ret_val)
+                return ret_val
+        except Error as e:
+            print(e)
 
-# if __name__ == '__main__':
-#     db_file = r"/home/zip822/Projects/TemperatureSensor/db/tempSensor.db"
-#     try:
-#         repo = Repository(db_file)
-#         repo.insert_temperature_record(69.6, 96.9)
-#     except Error as e:
-#         print(e)
+    def get_active_email(self):
+        """ retrieve email addresses on email-enabled accounts """
+        get_active_email_sql = '''
+            SELECT emailAddress
+            FROM account
+            WHERE enableEmail = 1
+            '''
+        try:
+            conn = self.create_connection()
+            with conn:
+                c = conn.cursor()
+                c.execute(get_active_email_sql)
+                ret_val = c.fetchall()
+                print(ret_val)
+                return ret_val
+        except Error as e:
+            print(e)
+
+if __name__ == '__main__':
+    db_file = r"/home/zip822/Projects/TemperatureSensor/db/tempSensor.db"
+    try:
+        repo = Repository(db_file)
+        repo.get_settings()
+    except Error as e:
+        print(e)

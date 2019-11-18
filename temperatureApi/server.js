@@ -54,22 +54,44 @@ app.get("/api/account/:id", (req, res, next) => {
 // Add new account
 app.post("/api/account/", (req, res, next) => {
     var errors=[]
+    var data = {
+        firstName : "",
+        lastName : "",
+        sms : "",
+        enableSms : 0,
+        enableEmail : 0
+    };
     if (!req.body.password){
         errors.push("No password specified");
     }
-    if (!req.body.username){
-        errors.push("No username specified");
+    if (!req.body.emailAddress){
+        errors.push("No email specified");
     }
     if (errors.length){
         res.status(400).json({"error":errors.join(",")});
         return;
     }
-    var data = {
-        username: req.body.username,
-        password : md5(req.body.password)
+
+    data.emailAddress = req.body.emailAddress;
+    data.password = md5(req.body.password);
+    if (req.body.enableEmail){
+        data.enableEmail = req.body.enableEmail;
     }
-    var sql ='INSERT INTO account (username, password) VALUES (?,?)'
-    var params =[data.username, data.password]
+    if (req.body.enableSms){
+        data.enableSms = req.body.enableSms;
+    }
+    if (req.body.firstName){
+        data.firstName = req.body.firstName;
+    }
+    if (req.body.lastName){
+        data.lastName = req.body.lastName;
+    }
+    if (req.body.sms){
+        data.sms = req.body.sms;
+    }
+
+    var sql = 'INSERT INTO account (emailAddress, password, firstName, lastName, sms, enableEmail, enableSms) VALUES (?,?,?,?,?,?,?)'
+    var params = [data.emailAddress, data.password, data.firstName, data.lastName, data.sms, data.enableEmail, data.enableSms];
     db.run(sql, params, function (err, result) {
         if (err){
             res.status(400).json({"error": err.message})
