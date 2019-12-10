@@ -21,7 +21,7 @@ TemperatureSensor"""
         context = ssl.create_default_context()
 
         with smtplib.SMTP_SSL(self.smtp_server, self.port, context=context) as server:
-            password = 'wpet0822'
+            password = ''
             server.login(self.sender_email, password)
             print("Sending email...")
             self._send_email(server, account_list, current_temp, settings)
